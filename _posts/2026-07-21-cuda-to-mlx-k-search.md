@@ -3,7 +3,7 @@ layout: post
 title: "From CUDA to MLX: How K-Search Brings Decades of Kernel Expertise to Apple Silicon"
 date: 2026-07-21 09:00:00
 author: Shiyi Cao (UC Berkeley), Gal Bloch (IBM Research)
-img: https://bair.berkeley.edu/static/blog/cuda-to-mlx-k-search/cover.png
+img: /bair-blog-staging/assets/cuda-to-mlx-k-search/cover.png
 excerpt_separator: <!--more-->
 visible: True
 show_comments: False
@@ -12,14 +12,14 @@ show_comments: False
 <!-- twitter -->
 <meta name="twitter:title" content="From CUDA to MLX: How K-Search Brings Decades of Kernel Expertise to Apple Silicon">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://bair.berkeley.edu/static/blog/cuda-to-mlx-k-search/cover.png">
+<meta name="twitter:image" content="/bair-blog-staging/assets/cuda-to-mlx-k-search/cover.png">
 
 <meta name="keywords" content="CUDA, MLX, Apple Silicon, kernel optimization, evolutionary search, K-Search, FlashAttention, Mamba, state space models, Metal">
 <meta name="description" content="IBM Research extends K-Search, the evolutionary kernel search framework from Berkeley Sky Lab, with a CUDA-to-MLX translation layer that transfers expert kernel knowledge to Apple Silicon, reaching 97% of FlashAttention performance and a ~20x faster Mamba SSM prefill.">
 <meta name="author" content="Shiyi Cao, Gal Bloch">
 
 <p style="text-align:center;">
-<img src="https://bair.berkeley.edu/static/blog/cuda-to-mlx-k-search/cover.png" alt="Kernel knowledge transfer from CUDA to MLX"><br>
+<img src="/bair-blog-staging/assets/cuda-to-mlx-k-search/cover.png" alt="Kernel knowledge transfer from CUDA to MLX"><br>
 </p>
 
 The CUDA ecosystem has accumulated decades of hard-won kernel expertise: hand-tuned implementations of attention, state space models, and other critical operations representing thousands of engineering hours. Newer hardware ecosystems (Apple Silicon, custom AI accelerators, and others) are growing fast but lack this depth. Porting those optimizations by hand is slow, expensive, and requires hardware-specific expertise on M-series chips that is in short supply.
@@ -55,7 +55,7 @@ Measurements feed back into the search, which keeps refining, pursuing promising
 Search is grounded by a Spec: a domain-specific document encoding hardware rules, optimization patterns, and mathematical constraints which keeps generated code from hallucinating invalid primitives and ensures candidates will actually compile and run efficiently.
 
 <p style="text-align:center;">
-<img src="https://bair.berkeley.edu/static/blog/cuda-to-mlx-k-search/figure-01-ksearch-loop.png" alt="Overview of the K-Search loop" width="700"><br>
+<img src="/bair-blog-staging/assets/cuda-to-mlx-k-search/figure-01-ksearch-loop.png" alt="Overview of the K-Search loop" width="700"><br>
 <i>
 Figure 1: Overview of the K-Search loop (Cao et al., 2026). The framework operates on a Search State $S_t$ structured as a search tree. The tree consists of Closed nodes (blue, visited states with attached program like $x_{12}$) and a Frontier of Open nodes (orange, pending hypotheses like $u_{13}$). The workflow iterates through three phases: (1) Action Selection, where the most promising action node is retrieved from the frontier based on world model estimated priority score $V$; (2) Local Refinement, where a stochastic policy $\pi_{code}$ samples concrete implementations until stagnation; and (3) World Model Update, where the LLM reasons over the trajectory to update the search tree via Insert (adding new actions), Update (adjusting $V$, e.g., $u_{11}$ dropping from 0.9 to 0.6), and Prune (removing less promising nodes like $u_{10}$).
 </i>
@@ -86,7 +86,7 @@ Our translation layer consists of:
 ## Optimizing the Attention Kernel
 
 <p style="text-align:center;">
-<img src="https://bair.berkeley.edu/static/blog/cuda-to-mlx-k-search/figure-02-attention-optimizations.png" alt="Performance scaling of the Attention Kernel through stacked optimizations" width="700"><br>
+<img src="/bair-blog-staging/assets/cuda-to-mlx-k-search/figure-02-attention-optimizations.png" alt="Performance scaling of the Attention Kernel through stacked optimizations" width="700"><br>
 <i>
 Figure 2: Performance scaling of the Attention Kernel through stacked optimizations. The "Full Context" configuration successfully discovers and implements advanced strategies like double buffering and loop unrolling, achieving near-expert performance.
 </i>
